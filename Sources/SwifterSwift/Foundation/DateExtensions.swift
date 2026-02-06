@@ -738,11 +738,20 @@ public extension Date {
     ///     Date().string(withFormat: "HH:mm") -> "23:50"
     ///     Date().string(withFormat: "dd/MM/yyyy HH:mm") -> "1/12/17 23:50"
     ///
-    /// - Parameter format: Date format (default is "dd/MM/yyyy").
-    /// - Returns: date string.
-    func string(withFormat format: String = "dd/MM/yyyy HH:mm") -> String {
+    ///     // Specifying different locales:
+    ///
+    ///     date.string(withFormat: "dd MMMM yyyy", locale: Locale(identifier: "en_US")) -> "06 February 2023"
+    ///     date.string(withFormat: "dd MMMM yyyy", locale: Locale(identifier: "fr_FR")) -> "06 février 2023"
+    ///     date.string(withFormat: "dd MMMM yyyy", locale: Locale(identifier: "ja_JP")) -> "2023年02月06日"
+    ///
+    /// - Parameters:
+    ///   - format: The date format string. Default is `"dd/MM/yyyy HH:mm"`.
+    ///   - locale: The locale to use for formatting. Default is `.current`.
+    /// - Returns: A string representing the date in the specified format and locale.
+    func string(withFormat format: String = "dd/MM/yyyy HH:mm", locale: Locale = .current) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        dateFormatter.locale = locale
         return dateFormatter.string(from: self)
     }
 
